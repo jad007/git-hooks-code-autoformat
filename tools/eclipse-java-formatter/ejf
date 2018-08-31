@@ -27,7 +27,7 @@ lib_classpath="$(find "$d/lib/" -name '*.jar' | tr '\n' $sep)"
 src="$d/src/ejf/Main.java"
 bin="$d/bin"
 cls="$d/bin/ejf/Main.class"
-if [ "$src" -nt "$cls" ] ; then
+if [ ! -f "$cls" -o "$src" -nt "$cls" ] ; then
   echo "Recompiling $src ..."
   javac -cp "$lib_classpath" -d "$bin" "$src"
   touch -r "$src" "$cls"
